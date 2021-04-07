@@ -356,7 +356,7 @@ public class MediaPicker extends CordovaPlugin {
         }
     }
 
-    public String fileToBase64(String path) throws Exception{
+    private String fileToBase64(String path) throws Exception{
         byte[] data = null;
             BufferedInputStream in = new BufferedInputStream(new FileInputStream(path));
             data = new byte[in.available()];

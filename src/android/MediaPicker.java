@@ -167,6 +167,7 @@ public class MediaPicker extends CordovaPlugin {
                                 JSONObject object=new JSONObject();
                                 object.put("path",media.path);
                                 object.put("uri",Uri.fromFile(new File(media.path)));//Uri.fromFile(file).toString() || [NSURL fileURLWithPath:filePath] absoluteString]
+                                object.put("base64", fileToBase64(media.path));
                                 object.put("size",media.size);
                                 object.put("name",media.name);
                                 object.put("index",index);

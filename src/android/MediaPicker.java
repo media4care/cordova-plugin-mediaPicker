@@ -175,7 +175,8 @@ public class MediaPicker extends CordovaPlugin {
                                 index++;
                             }
                             MediaPicker.this.callback.success(jsonArray);
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
+                            MediaPicker.this.callback.error("activityResult error"+e);
                             e.printStackTrace();
                         }
                     }

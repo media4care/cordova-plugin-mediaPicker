@@ -356,16 +356,12 @@ public class MediaPicker extends CordovaPlugin {
         }
     }
 
-    public  String fileToBase64(String path) {
+    public String fileToBase64(String path) throws Exception{
         byte[] data = null;
-        try {
             BufferedInputStream in = new BufferedInputStream(new FileInputStream(path));
             data = new byte[in.available()];
             in.read(data);
             in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return Base64.encodeToString(data, Base64.NO_WRAP);
     }
 

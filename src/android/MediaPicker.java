@@ -167,6 +167,7 @@ public class MediaPicker extends CordovaPlugin {
                                 JSONObject object=new JSONObject();
                                 object.put("path",media.path);
                                 object.put("uri",Uri.fromFile(new File(media.path)));//Uri.fromFile(file).toString() || [NSURL fileURLWithPath:filePath] absoluteString]
+                                object.put("base64", fileToBase64(media.path));
                                 object.put("size",media.size);
                                 object.put("name",media.name);
                                 object.put("index",index);
@@ -175,7 +176,8 @@ public class MediaPicker extends CordovaPlugin {
                                 index++;
                             }
                             MediaPicker.this.callback.success(jsonArray);
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
+                            MediaPicker.this.callback.error("activityResult error"+e);
                             e.printStackTrace();
                         }
                     }
@@ -356,16 +358,12 @@ public class MediaPicker extends CordovaPlugin {
         }
     }
 
-    public  String fileToBase64(String path) {
+    private String fileToBase64(String path) throws Exception{
         byte[] data = null;
-        try {
             BufferedInputStream in = new BufferedInputStream(new FileInputStream(path));
             data = new byte[in.available()];
             in.read(data);
             in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return Base64.encodeToString(data, Base64.NO_WRAP);
     }
 
